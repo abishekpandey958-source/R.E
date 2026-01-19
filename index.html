@@ -23,7 +23,16 @@
 <script src="https://unpkg.com/lucide@latest"></script>  
 
 <style>  
-    /* Custom styles to prevent selecting text like in a native app */  
+    /* Custom styles to prevent selecting text like in a native app */
+    <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Service Worker Registered"))
+        .catch(err => console.log("SW registration failed:", err));
+    });
+  }
+</script>
     body {  
         -webkit-user-select: none;  
         user-select: none;  
