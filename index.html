@@ -3,177 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>3 Pulley Modified ATD</title>
-
+  <title>ATD Premium Pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-    body {
-      -webkit-user-select: none;
-      user-select: none;
-      background: #f0f4f8; /* Slightly brighter for better contrast */
-      font-family: system-ui, -apple-system, sans-serif;
-      color: #1e293b;
+    :root {
+      --primary: #0f172a;
+      --accent: #eab308;
     }
+    
+    body { transition: background 0.3s ease; }
+    
+    /* Light Mode Styles */
+    body.light { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); color: #1e293b; }
+    .light .premium-card { background: rgba(255, 255, 255, 0.9); box-shadow: 0 15px 30px -5px rgba(0,0,0,0.1); border: 1px solid white; }
+    .light .inset-3d { background: #f8fafc; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05); }
 
-    /* Enhanced Neumorphism for better visibility */
-    .neuma-raised {
-      background: #f0f4f8;
-      box-shadow: 6px 6px 12px #d1d9e6, 
-                 -6px -6px 12px #ffffff;
-      border-radius: 16px;
-    }
+    /* Dark Mode Styles */
+    body.dark { background: #0f172a; color: #f8fafc; }
+    body.dark .premium-card { background: #1e293b; box-shadow: 0 15px 35px -5px rgba(0,0,0,0.4); border: 1px solid #334155; }
+    body.dark .inset-3d { background: #0f172a; box-shadow: inset 2px 2px 8px rgba(0,0,0,0.3); color: white; }
+    body.dark label { color: #94a3b8; }
+    body.dark .text-slate-900 { color: #ffffff; }
 
-    .neuma-sunken {
-      background: #f0f4f8;
-      box-shadow: inset 4px 4px 8px #d1d9e6, 
-                  inset -4px -4px 8px #ffffff;
-      border: none;
-    }
-
-    /* High-Visibility Button */
-    .btn-3d-blue {
-      background: linear-gradient(145deg, #2563eb, #1e40af);
-      box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
-      transition: all 0.2s ease;
-    }
-
-    .btn-3d-blue:active {
-      transform: scale(0.97);
-      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
-    }
-
-    #splash {
-      position: fixed;
-      inset: 0;
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+    /* Toggle Switch */
+    .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: #eab308; }
+    input:checked + .slider:before { transform: translateX(24px); }
   </style>
 </head>
+<body class="light p-4">
 
-<body>
-
-<div id="splash">
-  <h1 class="text-white text-3xl font-black tracking-tighter">ATD CALC</h1>
-  <div class="mt-4 w-12 h-1 bg-blue-500 rounded-full animate-pulse"></div>
+<div class="max-w-md mx-auto flex justify-between items-center mb-6 pt-4">
+  <div class="text-left">
+    <h1 class="text-2xl font-black tracking-tighter uppercase">ATD CALC</h1>
+    <div class="h-1 w-12 bg-yellow-500 rounded-full"></div>
+  </div>
+  <div class="flex items-center gap-2">
+    <span class="text-[10px] font-black uppercase text-slate-500">Mode</span>
+    <label class="switch">
+      <input type="checkbox" onchange="toggleTheme()">
+      <span class="slider"></span>
+    </label>
+  </div>
 </div>
 
-<header class="text-center pt-10 pb-2 px-4">
-  <h1 class="text-2xl font-black text-slate-800 uppercase tracking-tight leading-tight">
-    ATD Dimension Calculator
-  </h1>
-  <p class="text-sm text-slate-500 mt-2 font-medium">
-    Developed by <span class="text-blue-600 font-bold">Abhishek Pandey</span>
+<header class="text-center mb-6">
+  <p class="text-xs font-bold text-slate-500 tracking-widest uppercase">
+    Expert System by <span class="text-blue-600 dark:text-yellow-500 font-black border-b-2 border-yellow-500/50">Abhishek Pandey</span>
   </p>
 </header>
 
-<main class="p-6 max-w-md mx-auto space-y-8">
-
-  <div class="neuma-raised py-4 text-center font-extrabold text-blue-700 text-base uppercase tracking-widest border border-white/50">
-    3-Pulley Modified ATD
-  </div>
-
-  <div class="space-y-6">
+<main class="max-w-md mx-auto space-y-6">
+  <div class="premium-card p-6 space-y-5 rounded-3xl transition-all">
     <div class="space-y-2">
-      <label class="text-sm font-bold text-slate-700 ml-1">HALF TENSION LENGTH (m)</label>
-      <input id="length" type="number" placeholder="750"
-        class="w-full p-5 rounded-2xl neuma-sunken text-xl font-bold text-slate-800 placeholder-slate-300 outline-none focus:ring-2 focus:ring-blue-400/50">
+      <label class="text-xs font-black uppercase ml-1">Half Tension Length (m)</label>
+      <input id="length" type="number" placeholder="750" 
+        class="w-full p-4 rounded-xl inset-3d text-xl font-bold outline-none border-0 focus:ring-2 focus:ring-yellow-500">
     </div>
 
     <div class="space-y-2">
-      <label class="text-sm font-bold text-slate-700 ml-1">TEMPERATURE (°C)</label>
-      <input id="temperature" type="number" placeholder="35"
-        class="w-full p-5 rounded-2xl neuma-sunken text-xl font-bold text-slate-800 placeholder-slate-300 outline-none focus:ring-2 focus:ring-blue-400/50">
+      <label class="text-xs font-black uppercase ml-1">Ambient Temperature (°C)</label>
+      <input id="temperature" type="number" placeholder="35" 
+        class="w-full p-4 rounded-xl inset-3d text-xl font-bold outline-none border-0 focus:ring-2 focus:ring-yellow-500">
     </div>
+
+    <button onclick="calculate()" class="w-full bg-slate-900 dark:bg-yellow-500 text-yellow-500 dark:text-slate-900 py-4 rounded-xl font-black text-lg uppercase tracking-widest shadow-xl transition-all">
+      Calculate Values
+    </button>
   </div>
 
-  <button onclick="calculate()" class="w-full btn-3d-blue text-white py-5 rounded-2xl font-black text-xl uppercase tracking-wider">
-    Calculate Dimensions
-  </button>
-
-  <div id="results" class="hidden neuma-raised p-6 space-y-6 border-2 border-white">
-    <div class="flex justify-between items-center bg-slate-100 p-3 rounded-xl">
-       <span class="text-slate-700 font-bold text-sm uppercase">Temp Difference (ΔT)</span>
-       <span class="text-blue-700 text-lg font-black"><span id="deltaT">0</span>°C</span>
-    </div>
-
-    <div class="grid grid-cols-1 gap-4">
-      <div class="bg-white p-4 rounded-2xl shadow-sm flex justify-between items-center border border-slate-100">
-        <span class="text-2xl font-black text-blue-600">X</span>
-        <div class="text-right">
-            <span id="resX_mm" class="text-3xl font-black text-slate-800">0</span>
-            <span class="text-sm font-bold text-slate-400 ml-1">mm</span>
+  <div id="results" class="hidden space-y-4">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="premium-card p-5 border-t-4 border-yellow-500 text-center rounded-2xl">
+        <span class="block text-slate-400 font-black text-[10px] uppercase mb-1">X VALUE</span>
+        <div class="flex flex-col">
+          <span id="resX_mm" class="text-3xl font-black">0</span>
+          <span class="text-xs font-bold text-yellow-500 uppercase">mm</span>
+          <span id="resX_m" class="text-[10px] font-bold text-slate-400 mt-2">0.000 m</span>
         </div>
       </div>
-      
-      <div class="bg-white p-4 rounded-2xl shadow-sm flex justify-between items-center border border-slate-100">
-        <span class="text-2xl font-black text-blue-600">Y</span>
-        <div class="text-right">
-            <span id="resY_mm" class="text-3xl font-black text-slate-800">0</span>
-            <span class="text-sm font-bold text-slate-400 ml-1">mm</span>
+      <div class="premium-card p-5 border-t-4 border-slate-900 dark:border-white text-center rounded-2xl">
+        <span class="block text-slate-400 font-black text-[10px] uppercase mb-1">Y VALUE</span>
+        <div class="flex flex-col">
+          <span id="resY_mm" class="text-3xl font-black">0</span>
+          <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase">mm</span>
+          <span id="resY_m" class="text-[10px] font-bold text-slate-400 mt-2">0.000 m</span>
         </div>
       </div>
     </div>
-
-    <p class="text-xs text-center text-slate-500 font-bold bg-white/50 py-2 rounded-lg italic">
-      Reference Temp: 35°C (Indian Railway Standard)
-    </p>
   </div>
-
 </main>
 
-<footer class="text-center mt-4 pb-12 px-6">
-  <div class="neuma-raised p-6 space-y-3">
-    <p class="text-xs font-bold text-slate-600 leading-relaxed bg-white/80 p-2 rounded-lg">
-      FORMULA: X / Y = 1300 / 2300 + (L × 1.7×10⁻⁵ × ΔT)
+<footer class="max-w-md mx-auto mt-8 mb-10">
+  <div class="premium-card p-6 bg-slate-900 text-white rounded-3xl text-center relative overflow-hidden">
+    <p class="text-[10px] font-mono text-yellow-500/80 mb-4 border border-yellow-500/20 p-2 rounded">
+      X/Y = 1300/2300 + (L × 1.7×10⁻⁵ × ΔT)
     </p>
-    <div class="space-y-1">
-        <p class="text-sm font-black text-blue-900 tracking-tighter uppercase">
-            Eastern Railway – TRD / Basirhat
-        </p>
-        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            © 2026 Abhishek Pandey
-        </p>
+    <p class="text-sm font-black tracking-widest uppercase">Eastern Railway</p>
+    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">TRD Division / Basirhat</p>
+    <div class="pt-3">
+      <p class="text-xs font-black text-yellow-500 uppercase tracking-widest">© 2026 Abhishek Pandey</p>
     </div>
   </div>
 </footer>
 
 <script>
-  window.onload = () => {
-    setTimeout(() => { document.getElementById("splash").style.display = "none"; }, 1200);
-  };
+  function toggleTheme() {
+    document.body.classList.toggle('light');
+    document.body.classList.toggle('dark');
+  }
 
   function calculate() {
     const L = parseFloat(document.getElementById("length").value);
     const T = parseFloat(document.getElementById("temperature").value);
+    if (isNaN(L) || isNaN(T)) return;
 
-    if (isNaN(L) || isNaN(T)) {
-      alert("Please enter valid numbers");
-      return;
-    }
+    const deltaL_mm = L * 1.7e-5 * (T - 35) * 1000;
+    const X_mm = 1300 + deltaL_mm;
+    const Y_mm = 2300 + (3 * deltaL_mm);
 
-    const T0 = 35;
-    const alpha = 1.7e-5;
-    const deltaT = T - T0;
-    const deltaL = L * alpha * deltaT * 1000;
-
-    const X = 1300 + deltaL;
-    const Y = 2300 + (3 * deltaL); // Standard 3-Pulley ratio adjustment
-
-    document.getElementById("deltaT").textContent = deltaT;
-    document.getElementById("resX_mm").textContent = Math.round(X);
-    document.getElementById("resY_mm").textContent = Math.round(Y);
-
-    const resDiv = document.getElementById("results");
-    resDiv.classList.remove("hidden");
-    resDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+    document.getElementById("resX_mm").textContent = Math.round(X_mm);
+    document.getElementById("resX_m").textContent = (X_mm / 1000).toFixed(3) + " m";
+    document.getElementById("resY_mm").textContent = Math.round(Y_mm);
+    document.getElementById("resY_m").textContent = (Y_mm / 1000).toFixed(3) + " m";
+    document.getElementById("results").classList.remove("hidden");
   }
 </script>
-
 </body>
 </html>
