@@ -3,149 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
   <title>3 Pulley Modified ATD</title>
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="app-icon.png">
+  <link rel="apple-touch-icon" href="app-icon.png">
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     body {
       -webkit-user-select: none;
       user-select: none;
-      background: #e0e5ec; /* Classic Neumorphic Background */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      background: #f1f5f9;
     }
-
-    /* Modern 3D Title - No Blurry Shadow */
-    .trd-title-3d {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #2d3748;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    input {
+      -webkit-user-select: text;
+      user-select: text;
     }
-
-    /* Neumorphic Raised Card (Pills & Buttons) */
-    .neuma-raised {
-      background: #e0e5ec;
-      box-shadow: 9px 9px 16px rgb(163,177,198,0.6), 
-                 -9px -9px 16px rgba(255,255,255, 0.5);
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    /* Neumorphic Sunken (Inputs) */
-    .neuma-sunken {
-      background: #e0e5ec;
-      box-shadow: inset 6px 6px 12px #bec3c9, 
-                  inset -6px -6px 12px #ffffff;
-      border: none;
-      outline: none;
-    }
-
-    /* Primary Action Button - Deep Blue 3D */
-    .btn-3d-blue {
-      background: linear-gradient(145deg, #2563eb, #1d4ed8);
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.2),
-                  inset 1px 1px 2px rgba(255,255,255,0.3);
-      transition: all 0.2s ease;
-    }
-
-    .btn-3d-blue:active {
-      box-shadow: inset 4px 4px 8px rgba(0,0,0,0.3);
-      transform: translateY(2px);
-    }
-
     #splash {
       position: fixed;
       inset: 0;
-      background: #1e293b;
+      background: #121212;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
+    #splash img {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 15px;
+    }
+    #splash h1 {
+      color: #fff;
+      font-size: 24px;
+    }
   </style>
 </head>
 
 <body>
 
+<!-- Splash -->
 <div id="splash">
-  <h1 class="text-white text-2xl font-bold tracking-widest">ATD CALC</h1>
-  <p class="text-blue-400 animate-pulse mt-2">Loading System...</p>
+  <img src="logo.png" alt="ATD Calc">
+  <h1>ATD Calc</h1>
 </div>
 
-<header class="text-center pt-8 pb-4">
-  <h1 class="trd-title-3d">ATD Dimension Calculator</h1>
-  <p class="text-xs text-slate-500 mt-1">Developed by <span class="font-bold text-slate-700">Abhishek Pandey</span></p>
-</header>
+<!-- Header -->
+<div class="text-center mt-6">
+  <h1 class="text-xl font-bold">ATD DIMENSION CALCULATOR</h1>
+  <p class="text-sm text-slate-600">
+    Developed by <b>Abhishek Pandey</b>
+  </p>
+</div>
 
-<main class="p-6 max-w-md mx-auto space-y-8">
+<!-- Main -->
+<main class="p-4 max-w-md mx-auto space-y-4">
 
-  <div class="neuma-raised py-3 text-center font-bold text-blue-700 text-sm uppercase tracking-wider">
+  <div class="bg-white rounded-full shadow text-center py-3 font-semibold">
     3-Pulley Modified ATD
   </div>
 
-  <div class="space-y-2">
-    <label class="text-xs font-bold text-slate-600 ml-1 uppercase">Half Tension Length (m)</label>
-    <input id="length" type="number" placeholder="750"
-      class="w-full p-4 rounded-xl neuma-sunken text-lg font-semibold text-slate-700">
+  <div>
+    <label class="text-sm font-medium">Half Tension Length (m)</label>
+    <input id="length" type="number" placeholder="e.g. 750"
+      class="w-full p-3 rounded-xl border mt-1">
   </div>
 
-  <div class="space-y-2">
-    <label class="text-xs font-bold text-slate-600 ml-1 uppercase">Temperature (°C)</label>
-    <input id="temperature" type="number" placeholder="35"
-      class="w-full p-4 rounded-xl neuma-sunken text-lg font-semibold text-slate-700">
+  <div>
+    <label class="text-sm font-medium">Temperature (°C)</label>
+    <input id="temperature" type="number" placeholder="e.g. 35"
+      class="w-full p-3 rounded-xl border mt-1">
   </div>
 
-  <button onclick="calculate()" class="w-full btn-3d-blue text-white py-4 rounded-xl font-extrabold text-lg uppercase tracking-tight">
+  <button onclick="calculate()"
+    class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold">
     Calculate Dimensions
   </button>
 
-  <div id="results" class="hidden neuma-raised p-6 space-y-4 border-l-4 border-blue-500">
-    <div class="flex justify-between items-center border-b pb-2">
-       <span class="text-slate-500 font-medium italic">Temp Difference (ΔT)</span>
-       <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold"><span id="deltaT">0</span>°C</span>
-    </div>
+  <!-- Results -->
+  <div id="results" class="hidden bg-white rounded-xl p-4 shadow space-y-1">
 
-    <div class="grid grid-cols-2 gap-4">
-      <div class="bg-white/50 p-3 rounded-lg text-center">
-        <p class="text-xs text-slate-400 uppercase font-bold">Value X</p>
-        <p class="text-2xl font-black text-slate-800"><span id="resX_mm">0</span> <small class="text-sm">mm</small></p>
-      </div>
-      <div class="bg-white/50 p-3 rounded-lg text-center">
-        <p class="text-xs text-slate-400 uppercase font-bold">Value Y</p>
-        <p class="text-2xl font-black text-slate-800"><span id="resY_mm">0</span> <small class="text-sm">mm</small></p>
-      </div>
-    </div>
-
-    <p class="text-[10px] text-center text-slate-400 leading-tight">
-      Reference Temperature = 35°C<br>(Indian Railway TRD Standard)
+    <p class="text-sm text-slate-600">
+      <b>ΔT (Temp Difference):</b>
+      <span id="deltaT">0</span> °C
     </p>
+
+    <p class="text-lg"><b>X:</b> <span id="resX_mm">0.00</span> mm</p>
+    <p class="text-lg"><b>Y:</b> <span id="resY_mm">0.00</span> mm</p>
+
+    <p class="text-xs text-slate-500 border-t pt-2 mt-2">
+      Reference Temperature = <b>35°C</b> (Indian Railway TRD Standard)
+    </p>
+
   </div>
 
 </main>
 
-<footer class="text-center text-[10px] text-slate-500 mt-4 pb-10 px-6 leading-relaxed">
-  <div class="neuma-raised p-3 opacity-80">
-    <p class="font-mono mb-1">Formula: X/Y = 1300/2300 + (L × 1.7×10⁻⁵ × ΔT)</p>
-    <p class="font-bold text-slate-600 uppercase">Eastern Railway – TRD / Basirhat</p>
-    <p class="mt-2">© 2026 Abhishek Pandey. All Rights Reserved.</p>
-  </div>
+<!-- Footer -->
+<footer class="text-center text-xs text-slate-500 mt-6 pb-6">
+  <p>Formula: X / Y = 1300 / 2300 + (L × 1.7×10⁻⁵ × ΔT)</p>
+  <p class="font-bold mt-2">EASTERN RAILWAY – TRD / BASIRHAT</p>
 </footer>
 
 <script>
+  // Hide splash
   window.onload = () => {
     setTimeout(() => {
       document.getElementById("splash").style.display = "none";
-    }, 1500);
+    }, 2000);
   };
 
+  // Engineering rounding
   function round(val, digits) {
     return Math.round((val + Number.EPSILON) * 10 ** digits) / 10 ** digits;
   }
 
+  // IR-TRD Calculation
   function calculate() {
     const L = parseFloat(document.getElementById("length").value);
     const T = parseFloat(document.getElementById("temperature").value);
@@ -155,21 +139,27 @@
       return;
     }
 
-    const T0 = 35;
-    const alpha = 1.7e-5;
-    const deltaT = T - T0;
-    const deltaL = L * alpha * deltaT * 1000;
+    const T0 = 35;           // IR reference temperature
+    const alpha = 1.7e-5;    // Copper expansion coefficient
+
+    const deltaT = T - T0;   // ΔT
+    const deltaL = L * alpha * deltaT * 1000; // in mm
 
     const X = 1300 + deltaL;
     const Y = 2300 + 3 * deltaL;
 
     document.getElementById("deltaT").textContent = deltaT;
-    document.getElementById("resX_mm").textContent = round(X, 1);
-    document.getElementById("resY_mm").textContent = round(Y, 1);
+    document.getElementById("resX_mm").textContent = round(X, 2);
+    document.getElementById("resY_mm").textContent = round(Y, 2);
 
-    const resDiv = document.getElementById("results");
-    resDiv.classList.remove("hidden");
-    resDiv.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("results").classList.remove("hidden");
+    document.getElementById("results").scrollIntoView({ behavior: "smooth" });
+  }
+
+  lucide.createIcons();
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
   }
 </script>
 
