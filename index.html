@@ -7,115 +7,110 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --primary: #0f172a;
-      --accent: #eab308;
+      --primary: #0f172a; /* Deep Navy */
+      --accent: #eab308;  /* Gold */
+      --glass: rgba(255, 255, 255, 0.95);
     }
-    
-    body { transition: background 0.3s ease; }
-    
-    /* Light Mode Styles */
-    body.light { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); color: #1e293b; }
-    .light .premium-card { background: rgba(255, 255, 255, 0.9); box-shadow: 0 15px 30px -5px rgba(0,0,0,0.1); border: 1px solid white; }
-    .light .inset-3d { background: #f8fafc; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05); }
-
-    /* Dark Mode Styles */
-    body.dark { background: #0f172a; color: #f8fafc; }
-    body.dark .premium-card { background: #1e293b; box-shadow: 0 15px 35px -5px rgba(0,0,0,0.4); border: 1px solid #334155; }
-    body.dark .inset-3d { background: #0f172a; box-shadow: inset 2px 2px 8px rgba(0,0,0,0.3); color: white; }
-    body.dark label { color: #94a3b8; }
-    body.dark .text-slate-900 { color: #ffffff; }
-
-    /* Toggle Switch */
-    .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px; }
-    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-    input:checked + .slider { background-color: #eab308; }
-    input:checked + .slider:before { transform: translateX(24px); }
+    body {
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    /* 3D Floating Effect */
+    .premium-card {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border-radius: 24px;
+    }
+    /* Deep Inset for Inputs */
+    .inset-3d {
+      background: #f8fafc;
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.08), inset -3px -3px 7px #ffffff;
+    }
+    /* Glowing Button */
+    .btn-premium {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-premium:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.4);
+    }
   </style>
 </head>
-<body class="light p-4">
+<body class="p-4">
 
-<div class="max-w-md mx-auto flex justify-between items-center mb-6 pt-4">
-  <div class="text-left">
-    <h1 class="text-2xl font-black tracking-tighter uppercase">ATD CALC</h1>
-    <div class="h-1 w-12 bg-yellow-500 rounded-full"></div>
-  </div>
-  <div class="flex items-center gap-2">
-    <span class="text-[10px] font-black uppercase text-slate-500">Mode</span>
-    <label class="switch">
-      <input type="checkbox" onchange="toggleTheme()">
-      <span class="slider"></span>
-    </label>
-  </div>
-</div>
-
-<header class="text-center mb-6">
-  <p class="text-xs font-bold text-slate-500 tracking-widest uppercase">
-    Expert System by <span class="text-blue-600 dark:text-yellow-500 font-black border-b-2 border-yellow-500/50">Abhishek Pandey</span>
+<header class="text-center py-6">
+  <h1 class="text-3xl font-black text-slate-900 tracking-tighter uppercase">ATD Dimension</h1>
+  <div class="h-1 w-20 bg-yellow-500 mx-auto rounded-full mt-1"></div>
+  <p class="text-xs font-bold text-slate-500 mt-2 tracking-widest uppercase">
+    Expert System by <span class="text-slate-900 border-b-2 border-yellow-500">Abhishek Pandey</span>
   </p>
 </header>
 
 <main class="max-w-md mx-auto space-y-6">
-  <div class="premium-card p-6 space-y-5 rounded-3xl transition-all">
+  
+  <div class="premium-card p-6 space-y-5">
     <div class="space-y-2">
-      <label class="text-xs font-black uppercase ml-1">Half Tension Length (m)</label>
+      <label class="text-xs font-black text-slate-500 uppercase ml-1">Half Tension Length (m)</label>
       <input id="length" type="number" placeholder="750" 
-        class="w-full p-4 rounded-xl inset-3d text-xl font-bold outline-none border-0 focus:ring-2 focus:ring-yellow-500">
+        class="w-full p-4 rounded-xl inset-3d text-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-yellow-500">
     </div>
 
     <div class="space-y-2">
-      <label class="text-xs font-black uppercase ml-1">Ambient Temperature (°C)</label>
+      <label class="text-xs font-black text-slate-500 uppercase ml-1">Ambient Temperature (°C)</label>
       <input id="temperature" type="number" placeholder="35" 
-        class="w-full p-4 rounded-xl inset-3d text-xl font-bold outline-none border-0 focus:ring-2 focus:ring-yellow-500">
+        class="w-full p-4 rounded-xl inset-3d text-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-yellow-500">
     </div>
 
-    <button onclick="calculate()" class="w-full bg-slate-900 dark:bg-yellow-500 text-yellow-500 dark:text-slate-900 py-4 rounded-xl font-black text-lg uppercase tracking-widest shadow-xl transition-all">
+    <button onclick="calculate()" class="w-full btn-premium text-yellow-500 py-4 rounded-xl font-black text-lg uppercase tracking-widest border border-yellow-500/30">
       Calculate Values
     </button>
   </div>
 
-  <div id="results" class="hidden space-y-4">
+  <div id="results" class="hidden space-y-4 animate-in fade-in zoom-in duration-500">
     <div class="grid grid-cols-2 gap-4">
-      <div class="premium-card p-5 border-t-4 border-yellow-500 text-center rounded-2xl">
-        <span class="block text-slate-400 font-black text-[10px] uppercase mb-1">X VALUE</span>
-        <div class="flex flex-col">
-          <span id="resX_mm" class="text-3xl font-black">0</span>
-          <span class="text-xs font-bold text-yellow-500 uppercase">mm</span>
-          <span id="resX_m" class="text-[10px] font-bold text-slate-400 mt-2">0.000 m</span>
+      <div class="premium-card p-5 border-t-4 border-yellow-500 text-center">
+        <span class="block text-slate-400 font-black text-xs uppercase mb-1">Dimension X</span>
+        <div class="text-slate-900">
+          <span id="resX_mm" class="text-3xl font-black">0</span><span class="text-sm font-bold ml-1">mm</span>
         </div>
+        <div id="resX_m" class="text-xs font-bold text-slate-400 mt-1">0.000 m</div>
       </div>
-      <div class="premium-card p-5 border-t-4 border-slate-900 dark:border-white text-center rounded-2xl">
-        <span class="block text-slate-400 font-black text-[10px] uppercase mb-1">Y VALUE</span>
-        <div class="flex flex-col">
-          <span id="resY_mm" class="text-3xl font-black">0</span>
-          <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase">mm</span>
-          <span id="resY_m" class="text-[10px] font-bold text-slate-400 mt-2">0.000 m</span>
+      <div class="premium-card p-5 border-t-4 border-slate-900 text-center">
+        <span class="block text-slate-400 font-black text-xs uppercase mb-1">Dimension Y</span>
+        <div class="text-slate-900">
+          <span id="resY_mm" class="text-3xl font-black">0</span><span class="text-sm font-bold ml-1">mm</span>
         </div>
+        <div id="resY_m" class="text-xs font-bold text-slate-400 mt-1">0.000 m</div>
       </div>
     </div>
   </div>
+
 </main>
 
 <footer class="max-w-md mx-auto mt-8 mb-10">
-  <div class="premium-card p-6 bg-slate-900 text-white rounded-3xl text-center relative overflow-hidden">
-    <p class="text-[10px] font-mono text-yellow-500/80 mb-4 border border-yellow-500/20 p-2 rounded">
+  <div class="premium-card p-6 bg-slate-900 text-white relative overflow-hidden">
+    <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-yellow-500/10 rounded-full"></div>
+    
+    <p class="text-[10px] font-mono text-yellow-500/80 mb-4 text-center leading-relaxed border border-yellow-500/20 p-2 rounded">
       X/Y = 1300/2300 + (L × 1.7×10⁻⁵ × ΔT)
     </p>
-    <p class="text-sm font-black tracking-widest uppercase">Eastern Railway</p>
-    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">TRD Division / Basirhat</p>
-    <div class="pt-3">
-      <p class="text-xs font-black text-yellow-500 uppercase tracking-widest">© 2026 Abhishek Pandey</p>
+    
+    <div class="text-center space-y-1">
+      <p class="text-sm font-black tracking-widest uppercase">Eastern Railway</p>
+      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">TRD Division / Basirhat</p>
+      <div class="pt-3">
+        <p class="text-xs font-black text-yellow-500 uppercase tracking-[0.2em]">© 2026 Abhishek Pandey</p>
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-  function toggleTheme() {
-    document.body.classList.toggle('light');
-    document.body.classList.toggle('dark');
-  }
-
   function calculate() {
     const L = parseFloat(document.getElementById("length").value);
     const T = parseFloat(document.getElementById("temperature").value);
@@ -129,8 +124,11 @@
     document.getElementById("resX_m").textContent = (X_mm / 1000).toFixed(3) + " m";
     document.getElementById("resY_mm").textContent = Math.round(Y_mm);
     document.getElementById("resY_m").textContent = (Y_mm / 1000).toFixed(3) + " m";
-    document.getElementById("results").classList.remove("hidden");
+
+    const resDiv = document.getElementById("results");
+    resDiv.classList.remove("hidden");
   }
 </script>
+
 </body>
 </html>
