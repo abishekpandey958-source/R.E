@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.card {
+  background: #111827;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 16px;
+  box-shadow:
+    8px 8px 16px rgba(0,0,0,0.6),
+   -6px -6px 12px rgba(255,255,255,0.04);
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #020617;
+  color: #e5e7eb;
+  border: none;
+  border-radius: 14px;
+  outline: none;
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,0.6),
+    inset -4px -4px 8px rgba(255,255,255,0.03);
+}
+
+button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:
+    6px 6px 14px rgba(0,0,0,0.6),
+   -4px -4px 10px rgba(255,255,255,0.1);
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,0.6),
+    inset -4px -4px 8px rgba(255,255,255,0.05);
+}
+
+.accent {
+  color: #38bdf8;
+}
+
+@media (max-width: 600px) {
+  .card {
+    margin: 10px;
+    padding: 16px;
+  }
+}
