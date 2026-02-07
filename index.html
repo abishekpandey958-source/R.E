@@ -48,6 +48,57 @@
       color: #fff;
       font-size: 24px;
     }
+    /* ---------- 3D Typography ---------- */
+.trd-title-3d {
+  font-size: 1.6rem;           /* Bigger title */
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #0f2a44;
+  text-shadow:
+    1px 1px 0 #c7d2fe,
+    2px 2px 0 #a5b4fc,
+    3px 3px 6px rgba(0,0,0,0.25);
+}
+
+/* ---------- 3D Pill / Card ---------- */
+.trd-pill-3d {
+  background: linear-gradient(145deg, #102f4a, #0b1f33);
+  color: white;
+  box-shadow:
+    4px 4px 10px rgba(0,0,0,0.35),
+    inset 1px 1px 2px rgba(255,255,255,0.15);
+  transform: translateZ(0);
+}
+
+/* ---------- Input 3D ---------- */
+.trd-input {
+  font-size: 1.1rem;           /* Bigger input text */
+  box-shadow:
+    inset 2px 2px 4px rgba(0,0,0,0.15),
+    inset -2px -2px 4px rgba(255,255,255,0.8);
+}
+
+/* ---------- Button 3D ---------- */
+.trd-button-3d {
+  font-size: 1.2rem;           /* Bigger button text */
+  background: linear-gradient(145deg, #0f2a44, #0b1f33);
+  box-shadow:
+    4px 4px 10px rgba(0,0,0,0.4),
+    inset 1px 1px 2px rgba(255,255,255,0.2);
+}
+
+.trd-button-3d:active {
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,0.5);
+  transform: scale(0.98);
+}
+
+/* ---------- Result 3D Card ---------- */
+.trd-result-3d {
+  box-shadow:
+    6px 6px 14px rgba(0,0,0,0.25),
+    inset 1px 1px 2px rgba(255,255,255,0.6);
+}
   </style>
 </head>
 
@@ -61,42 +112,42 @@
 
 <!-- Header -->
 <div class="text-center mt-6">
-  <h1 class="text-xl font-bold text-[#0f2a44]">
+  <h1 class="trd-title-3d">
   ATD DIMENSION CALCULATOR
-</h1>
+  </h1>
   <p class="text-sm text-slate-600">
     Developed by <b>Abhishek Pandey</b>
   </p>
-</div>
+  </div>
 
 <!-- Main -->
   <hr class="border-t border-slate-300 mt-6 mb-2">
 <main class="p-4 max-w-md mx-auto space-y-4">
 
-  <div class="bg-[#0f2a44] text-white rounded-full shadow-md text-center py-3 font-semibold tracking-wide">
+  <div class="trd-pill-3d rounded-full text-center py-4 font-semibold tracking-wide text-lg">
   3-Pulley Modified ATD
   </div>
 
   <div>
     <label class="text-sm font-medium">Half Tension Length (m)</label>
     <input id="length" type="number" placeholder="e.g. 750"
-      class="w-full p-3 rounded-xl border mt-1">
+      class="w-full p-4 rounded-xl border mt-1 trd-input"
   </div>
 
   <div>
     <label class="text-sm font-medium">Temperature (°C)</label>
     <input id="temperature" type="number" placeholder="e.g. 35"
-      class="w-full p-3 rounded-xl border mt-1">
+      class="w-full p-4 rounded-xl border mt-1 trd-input"
   </div>
 
   <button onclick="calculate()"
-  class="w-full bg-[#0f2a44] active:bg-[#0b1f33] text-white py-4 rounded-xl font-bold shadow-md">
+  class="w-full trd-button-3d text-white py-4 rounded-xl font-bold"
     Calculate Dimensions
   </button>
 
   <!-- Results -->
   
-<div id="results" class="hidden bg-white rounded-xl p-4 shadow-md border border-slate-300 space-y-1">
+<div id="results" class="hidden bg-white rounded-xl p-5 border border-slate-300 space-y-2 trd-result-3d">
     <p class="text-sm text-[#0f2a44] font-semibold">
       <b>ΔT (Temp Difference):</b>
       <span id="deltaT">0</span> °C
