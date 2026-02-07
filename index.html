@@ -92,16 +92,27 @@
   </button>
 
   <!-- Results -->
-  <div id="results" class="hidden bg-white rounded-xl p-4 shadow">
+  <div id="results" class="hidden bg-white rounded-xl p-4 shadow space-y-1">
+
+    <p class="text-sm text-slate-600">
+      <b>ΔT (Temp Difference):</b>
+      <span id="deltaT">0</span> °C
+    </p>
+
     <p class="text-lg"><b>X:</b> <span id="resX_mm">0.00</span> mm</p>
-    <p class="text-lg mt-1"><b>Y:</b> <span id="resY_mm">0.00</span> mm</p>
+    <p class="text-lg"><b>Y:</b> <span id="resY_mm">0.00</span> mm</p>
+
+    <p class="text-xs text-slate-500 border-t pt-2 mt-2">
+      Reference Temperature = <b>35°C</b> (Indian Railway TRD Standard)
+    </p>
+
   </div>
 
 </main>
 
 <!-- Footer -->
 <footer class="text-center text-xs text-slate-500 mt-6 pb-6">
-  <p>Formula: 1300 / 2300 + (L × 1.7e-5 × ΔT)</p>
+  <p>Formula: X / Y = 1300 / 2300 + (L × 1.7×10⁻⁵ × ΔT)</p>
   <p class="font-bold mt-2">EASTERN RAILWAY – TRD / BASIRHAT</p>
 </footer>
 
@@ -118,7 +129,7 @@
     return Math.round((val + Number.EPSILON) * 10 ** digits) / 10 ** digits;
   }
 
-  // Calculation (IR-safe)
+  // IR-TRD Calculation
   function calculate() {
     const L = parseFloat(document.getElementById("length").value);
     const T = parseFloat(document.getElementById("temperature").value);
@@ -128,14 +139,16 @@
       return;
     }
 
-    const T0 = 35;
-    const alpha = 1.7e-5;
+    const T0 = 35;           // IR reference temperature
+    const alpha = 1.7e-5;    // Copper expansion coefficient
 
-    const deltaL = L * alpha * (T0 - T) * 1000;
+    const deltaT = T - T0;   // ΔT
+    const deltaL = L * alpha * deltaT * 1000; // in mm
 
     const X = 1300 + deltaL;
     const Y = 2300 + 3 * deltaL;
 
+    document.getElementById("deltaT").textContent = deltaT;
     document.getElementById("resX_mm").textContent = round(X, 2);
     document.getElementById("resY_mm").textContent = round(Y, 2);
 
