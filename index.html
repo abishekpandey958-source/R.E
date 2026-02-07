@@ -19,6 +19,57 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* ---------- 3D Typography ---------- */
+.trd-title-3d {
+  font-size: 1.6rem;           /* Bigger title */
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #0f2a44;
+  text-shadow:
+    1px 1px 0 #c7d2fe,
+    2px 2px 0 #a5b4fc,
+    3px 3px 6px rgba(0,0,0,0.25);
+}
+
+/* ---------- 3D Pill / Card ---------- */
+.trd-pill-3d {
+  background: linear-gradient(145deg, #102f4a, #0b1f33);
+  color: white;
+  box-shadow:
+    4px 4px 10px rgba(0,0,0,0.35),
+    inset 1px 1px 2px rgba(255,255,255,0.15);
+  transform: translateZ(0);
+}
+
+/* ---------- Input 3D ---------- */
+.trd-input {
+  font-size: 1.1rem;           /* Bigger input text */
+  box-shadow:
+    inset 2px 2px 4px rgba(0,0,0,0.15),
+    inset -2px -2px 4px rgba(255,255,255,0.8);
+}
+
+/* ---------- Button 3D ---------- */
+.trd-button-3d {
+  font-size: 1.2rem;           /* Bigger button text */
+  background: linear-gradient(145deg, #0f2a44, #0b1f33);
+  box-shadow:
+    4px 4px 10px rgba(0,0,0,0.4),
+    inset 1px 1px 2px rgba(255,255,255,0.2);
+}
+
+.trd-button-3d:active {
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,0.5);
+  transform: scale(0.98);
+}
+
+/* ---------- Result 3D Card ---------- */
+.trd-result-3d {
+  box-shadow:
+    6px 6px 14px rgba(0,0,0,0.25),
+    inset 1px 1px 2px rgba(255,255,255,0.6);
+}
     body {
       -webkit-user-select: none;
       user-select: none;
