@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -19,19 +18,17 @@
   <!-- Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Styles -->
   <style>
     body {
       -webkit-user-select: none;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      background: #f1f5f9;
     }
-
     input {
       -webkit-user-select: text;
       user-select: text;
     }
-
     #splash {
       position: fixed;
       inset: 0;
@@ -42,13 +39,11 @@
       justify-content: center;
       z-index: 9999;
     }
-
     #splash img {
       width: 120px;
       height: 120px;
       margin-bottom: 15px;
     }
-
     #splash h1 {
       color: #fff;
       font-size: 24px;
@@ -58,106 +53,102 @@
 
 <body>
 
-  <!-- Splash Screen -->
-  <div id="splash">
-    <img src="logo.png" alt="ATD Calc">
-    <h1>ATD Calc</h1>
+<!-- Splash -->
+<div id="splash">
+  <img src="logo.png" alt="ATD Calc">
+  <h1>ATD Calc</h1>
+</div>
+
+<!-- Header -->
+<div class="text-center mt-6">
+  <h1 class="text-xl font-bold">ATD DIMENSION CALCULATOR</h1>
+  <p class="text-sm text-slate-600">
+    Developed by <b>Abhishek Pandey</b>
+  </p>
+</div>
+
+<!-- Main -->
+<main class="p-4 max-w-md mx-auto space-y-4">
+
+  <div class="bg-white rounded-full shadow text-center py-3 font-semibold">
+    3-Pulley Modified ATD
   </div>
 
-  <!-- Header -->
-  <div class="text-center mt-6">
-    <h1 class="text-xl font-bold">ATD DIMENSION CALCULATOR</h1>
-    <p class="text-sm text-slate-600">
-      Developed by <b>Abhishek Pandey</b>
-    </p>
+  <div>
+    <label class="text-sm font-medium">Half Tension Length (m)</label>
+    <input id="length" type="number" placeholder="e.g. 750"
+      class="w-full p-3 rounded-xl border mt-1">
   </div>
 
-  <!-- Main -->
-  <main class="p-4 max-w-md mx-auto space-y-4">
+  <div>
+    <label class="text-sm font-medium">Temperature (°C)</label>
+    <input id="temperature" type="number" placeholder="e.g. 35"
+      class="w-full p-3 rounded-xl border mt-1">
+  </div>
 
-    <div class="bg-white rounded-full shadow text-center py-3 font-semibold">
-      3-Pulley Modified ATD
-    </div>
+  <button onclick="calculate()"
+    class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold">
+    Calculate Dimensions
+  </button>
 
-    <div>
-      <label class="text-sm font-medium">Half Tension Length (m)</label>
-      <input id="length" type="number" placeholder="e.g. 750"
-        class="w-full p-3 rounded-xl border mt-1">
-    </div>
+  <!-- Results -->
+  <div id="results" class="hidden bg-white rounded-xl p-4 shadow">
+    <p class="text-lg"><b>X:</b> <span id="resX_mm">0.00</span> mm</p>
+    <p class="text-lg mt-1"><b>Y:</b> <span id="resY_mm">0.00</span> mm</p>
+  </div>
 
-    <div>
-      <label class="text-sm font-medium">Temperature (°C)</label>
-      <input id="temperature" type="number" placeholder="e.g. 35"
-        class="w-full p-3 rounded-xl border mt-1">
-    </div>
+</main>
 
-    <button onclick="calculate()"
-      class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold">
-      Calculate Dimensions
-    </button>
+<!-- Footer -->
+<footer class="text-center text-xs text-slate-500 mt-6 pb-6">
+  <p>Formula: 1300 / 2300 + (L × 1.7e-5 × ΔT)</p>
+  <p class="font-bold mt-2">EASTERN RAILWAY – TRD / BASIRHAT</p>
+</footer>
 
-    <!-- Results -->
-    <div id="results" class="hidden bg-white rounded-xl p-4 shadow">
-      <p><b>X:</b> <span id="resX_mm"></span> mm</p>
-      <p><b>Y:</b> <span id="resY_mm"></span> mm</p>
-    </div>
+<script>
+  // Hide splash
+  window.onload = () => {
+    setTimeout(() => {
+      document.getElementById("splash").style.display = "none";
+    }, 2000);
+  };
 
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center text-xs text-slate-500 mt-6">
-    <p>Formula: 1300/2300 + (L × 1.7e-5 × ΔT)</p>
-    <p class="font-bold mt-2">EASTERN RAILWAY – TRD / BASIRHAT</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    // Splash hide
-    window.onload = () => {
-      setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-      }, 2000);
-    };
-
-    // Calculation
-    function round(val, digits) {
-  return Math.round((val + Number.EPSILON) * 10 ** digits) / 10 ** digits;
-}
-
-function calculate() {
-  const L = parseFloat(document.getElementById("length").value);
-  const T = parseFloat(document.getElementById("temperature").value);
-
-  if (isNaN(L) || isNaN(T)) {
-    alert("Please enter valid numbers");
-    return;
+  // Engineering rounding
+  function round(val, digits) {
+    return Math.round((val + Number.EPSILON) * 10 ** digits) / 10 ** digits;
   }
 
-  const T0 = 35;
-  const alpha = 1.7e-5;
+  // Calculation (IR-safe)
+  function calculate() {
+    const L = parseFloat(document.getElementById("length").value);
+    const T = parseFloat(document.getElementById("temperature").value);
 
-  const deltaL = L * alpha * (T - T0) * 1000;
-
-  const X = 1300 + deltaL;
-  const Y = 2300 + 3 * deltaL;
-
-  document.getElementById("resX_mm").textContent = round(X, 2);
-  document.getElementById("resX_m").textContent = round(X / 1000, 4);
-
-  document.getElementById("resY_mm").textContent = round(Y, 2);
-  document.getElementById("resY_m").textContent = round(Y / 1000, 4);
-
-  document.getElementById("results").classList.remove("hidden");
-}
-
-    // Icons
-    lucide.createIcons();
-
-    // Service Worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js");
+    if (isNaN(L) || isNaN(T)) {
+      alert("Please enter valid numbers");
+      return;
     }
-  </script>
+
+    const T0 = 35;
+    const alpha = 1.7e-5;
+
+    const deltaL = L * alpha * (T0 - T) * 1000;
+
+    const X = 1300 + deltaL;
+    const Y = 2300 + 3 * deltaL;
+
+    document.getElementById("resX_mm").textContent = round(X, 2);
+    document.getElementById("resY_mm").textContent = round(Y, 2);
+
+    document.getElementById("results").classList.remove("hidden");
+    document.getElementById("results").scrollIntoView({ behavior: "smooth" });
+  }
+
+  lucide.createIcons();
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+  }
+</script>
 
 </body>
 </html>
