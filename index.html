@@ -3,108 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>ATD Premium Pro</title>
+  <title>ATD Aero Pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --primary: #0f172a; /* Deep Navy */
-      --accent: #eab308;  /* Gold */
-      --glass: rgba(255, 255, 255, 0.95);
+      --aero-blue: #2563eb;
+      --aero-gold: #fbbf24;
+      --deep-navy: #0f172a;
     }
+    
     body {
-      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      background: radial-gradient(circle at top, #f8fafc 0%, #cbd5e1 100%);
       min-height: 100vh;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      transition: background 0.4s ease;
     }
-    /* 3D Floating Effect */
-    .premium-card {
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      border-radius: 24px;
+
+    body.dark {
+      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+      color: #f8fafc;
     }
-    /* Deep Inset for Inputs */
-    .inset-3d {
-      background: #f8fafc;
-      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.08), inset -3px -3px 7px #ffffff;
+
+    /* Aero 3D Glass Effect */
+    .aero-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15), 
+                  inset 0 1px 2px rgba(255,255,255,1);
+      border-radius: 28px;
     }
-    /* Glowing Button */
-    .btn-premium {
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.4);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .dark .aero-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
     }
-    .btn-premium:active {
-      transform: translateY(2px);
-      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.4);
+
+    /* 3D Inset Inputs */
+    .aero-inset {
+      background: #f1f5f9;
+      box-shadow: inset 3px 3px 8px rgba(0,0,0,0.06), 
+                  inset -3px -3px 8px #ffffff;
     }
+
+    .dark .aero-inset {
+      background: #0f172a;
+      box-shadow: inset 4px 4px 10px rgba(0,0,0,0.4);
+      color: white;
+    }
+
+    /* Aero 3D Toggle Switch */
+    .switch { position: relative; display: inline-block; width: 60px; height: 30px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background: #94a3b8; transition: .4s; border-radius: 34px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+    .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px; background: white; transition: .4s; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+    input:checked + .slider { background: var(--aero-blue); }
+    input:checked + .slider:before { transform: translateX(30px); }
   </style>
 </head>
 <body class="p-4">
 
-<header class="text-center py-6">
-  <h1 class="text-3xl font-black text-slate-900 tracking-tighter uppercase">ATD Dimension</h1>
-  <div class="h-1 w-20 bg-yellow-500 mx-auto rounded-full mt-1"></div>
-  <p class="text-xs font-bold text-slate-500 mt-2 tracking-widest uppercase">
-    Expert System by <span class="text-slate-900 border-b-2 border-yellow-500">Abhishek Pandey</span>
-  </p>
-</header>
+<div class="max-w-md mx-auto flex justify-between items-center mb-4 pt-2">
+  <div class="flex items-center gap-2">
+     <div class="w-2 h-8 bg-blue-600 rounded-full"></div>
+     <h1 class="text-2xl font-black tracking-tighter uppercase dark:text-white">ATD PRO</h1>
+  </div>
+  <label class="switch">
+    <input type="checkbox" onchange="document.body.classList.toggle('dark')">
+    <span class="slider"></span>
+  </label>
+</div>
 
-<main class="max-w-md mx-auto space-y-6">
+<main class="max-w-md mx-auto space-y-5">
   
-  <div class="premium-card p-6 space-y-5">
+  <div class="text-center mb-2">
+    <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Developed by</p>
+    <p class="text-lg font-black text-blue-700 dark:text-yellow-400">Abhishek Pandey</p>
+  </div>
+
+  <div class="aero-card p-4 text-center border-b-4 border-blue-600">
+     <h2 class="text-xl font-black text-slate-800 dark:text-white uppercase tracking-tight">3-Pulley Modified ATD</h2>
+  </div>
+
+  <div class="aero-card p-6 space-y-6">
     <div class="space-y-2">
-      <label class="text-xs font-black text-slate-500 uppercase ml-1">Half Tension Length (m)</label>
+      <label class="text-xs font-black text-slate-400 uppercase ml-2">Half Tension Length (m)</label>
       <input id="length" type="number" placeholder="750" 
-        class="w-full p-4 rounded-xl inset-3d text-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-yellow-500">
+        class="w-full p-5 rounded-2xl aero-inset text-2xl font-bold outline-none focus:ring-4 focus:ring-blue-500/20 transition-all">
     </div>
 
     <div class="space-y-2">
-      <label class="text-xs font-black text-slate-500 uppercase ml-1">Ambient Temperature (°C)</label>
+      <label class="text-xs font-black text-slate-400 uppercase ml-2">Temperature (°C)</label>
       <input id="temperature" type="number" placeholder="35" 
-        class="w-full p-4 rounded-xl inset-3d text-xl font-bold text-slate-800 outline-none focus:ring-2 focus:ring-yellow-500">
+        class="w-full p-5 rounded-2xl aero-inset text-2xl font-bold outline-none focus:ring-4 focus:ring-blue-500/20 transition-all">
     </div>
 
-    <button onclick="calculate()" class="w-full btn-premium text-yellow-500 py-4 rounded-xl font-black text-lg uppercase tracking-widest border border-yellow-500/30">
-      Calculate Values
+    <button onclick="calculate()" class="w-full bg-blue-600 dark:bg-yellow-500 text-white dark:text-black py-5 rounded-2xl font-black text-xl uppercase tracking-widest shadow-2xl hover:scale-[1.02] active:scale-95 transition-all">
+      Calculate Dimensions
     </button>
   </div>
 
-  <div id="results" class="hidden space-y-4 animate-in fade-in zoom-in duration-500">
-    <div class="grid grid-cols-2 gap-4">
-      <div class="premium-card p-5 border-t-4 border-yellow-500 text-center">
-        <span class="block text-slate-400 font-black text-xs uppercase mb-1">Dimension X</span>
-        <div class="text-slate-900">
-          <span id="resX_mm" class="text-3xl font-black">0</span><span class="text-sm font-bold ml-1">mm</span>
+  <div id="results" class="hidden space-y-4">
+    <div class="grid grid-cols-1 gap-4">
+      <div class="aero-card p-6 border-l-[12px] border-blue-600">
+        <div class="flex justify-between items-center">
+          <span class="text-lg font-black text-blue-600 uppercase">Dim X</span>
+          <div class="text-right">
+            <span id="resX_mm" class="text-5xl font-black text-slate-900 dark:text-white">0</span>
+            <span class="text-xl font-bold text-slate-400">mm</span>
+          </div>
         </div>
-        <div id="resX_m" class="text-xs font-bold text-slate-400 mt-1">0.000 m</div>
+        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+            <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">In Meters:</span>
+            <span id="resX_m" class="text-3xl font-black text-blue-500 dark:text-yellow-400 tracking-tight">0.000 m</span>
+        </div>
       </div>
-      <div class="premium-card p-5 border-t-4 border-slate-900 text-center">
-        <span class="block text-slate-400 font-black text-xs uppercase mb-1">Dimension Y</span>
-        <div class="text-slate-900">
-          <span id="resY_mm" class="text-3xl font-black">0</span><span class="text-sm font-bold ml-1">mm</span>
+
+      <div class="aero-card p-6 border-l-[12px] border-slate-800 dark:border-yellow-500">
+        <div class="flex justify-between items-center">
+          <span class="text-lg font-black text-slate-800 dark:text-yellow-500 uppercase">Dim Y</span>
+          <div class="text-right">
+            <span id="resY_mm" class="text-5xl font-black text-slate-900 dark:text-white">0</span>
+            <span class="text-xl font-bold text-slate-400">mm</span>
+          </div>
         </div>
-        <div id="resY_m" class="text-xs font-bold text-slate-400 mt-1">0.000 m</div>
+        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
+            <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">In Meters:</span>
+            <span id="resY_m" class="text-3xl font-black text-slate-800 dark:text-yellow-400 tracking-tight">0.000 m</span>
+        </div>
       </div>
     </div>
   </div>
 
 </main>
 
-<footer class="max-w-md mx-auto mt-8 mb-10">
-  <div class="premium-card p-6 bg-slate-900 text-white relative overflow-hidden">
-    <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-yellow-500/10 rounded-full"></div>
-    
-    <p class="text-[10px] font-mono text-yellow-500/80 mb-4 text-center leading-relaxed border border-yellow-500/20 p-2 rounded">
-      X/Y = 1300/2300 + (L × 1.7×10⁻⁵ × ΔT)
+<footer class="max-w-md mx-auto mt-8 mb-10 space-y-4">
+  <div class="aero-card p-6 bg-slate-900/10 dark:bg-slate-900/50">
+    <p class="text-lg font-black text-center text-blue-800 dark:text-yellow-500 mb-4 bg-white/50 dark:bg-black/30 py-3 rounded-xl border border-white/20">
+      X / Y = 1300 / 2300 + (L × 1.7×10⁻⁵ × ΔT)
     </p>
     
-    <div class="text-center space-y-1">
-      <p class="text-sm font-black tracking-widest uppercase">Eastern Railway</p>
-      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">TRD Division / Basirhat</p>
-      <div class="pt-3">
-        <p class="text-xs font-black text-yellow-500 uppercase tracking-[0.2em]">© 2026 Abhishek Pandey</p>
+    <div class="text-center">
+      <p class="text-xl font-black text-slate-900 dark:text-white tracking-widest uppercase">EASTERN RAILWAY</p>
+      <p class="text-md font-bold text-blue-600 dark:text-slate-400 uppercase">TRD / BASIRHAT</p>
+      <div class="mt-6 pt-4 border-t border-slate-300 dark:border-slate-700">
+        <p class="text-sm font-black text-slate-500 uppercase tracking-[0.3em]">© 2026 ABHISHEK PANDEY</p>
       </div>
     </div>
   </div>
@@ -114,7 +158,10 @@
   function calculate() {
     const L = parseFloat(document.getElementById("length").value);
     const T = parseFloat(document.getElementById("temperature").value);
-    if (isNaN(L) || isNaN(T)) return;
+    if (isNaN(L) || isNaN(T)) {
+        alert("Please enter valid figures");
+        return;
+    }
 
     const deltaL_mm = L * 1.7e-5 * (T - 35) * 1000;
     const X_mm = 1300 + deltaL_mm;
@@ -122,11 +169,13 @@
 
     document.getElementById("resX_mm").textContent = Math.round(X_mm);
     document.getElementById("resX_m").textContent = (X_mm / 1000).toFixed(3) + " m";
+    
     document.getElementById("resY_mm").textContent = Math.round(Y_mm);
     document.getElementById("resY_m").textContent = (Y_mm / 1000).toFixed(3) + " m";
 
     const resDiv = document.getElementById("results");
     resDiv.classList.remove("hidden");
+    resDiv.scrollIntoView({ behavior: 'smooth' });
   }
 </script>
 
