@@ -1,12 +1,14 @@
 const CACHE_NAME = "atd-calc-v1";
 
 const FILES_TO_CACHE = [
-  "index.html",
-  "style.css",
-  "manifest.json",
-  "app-icon.png"
+  "./",
+  "./index.html",
+  "./style.css",
+  "./manifest.json",
+  "./app-icon.png"
 ];
 
+// Install
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
@@ -16,6 +18,7 @@ self.addEventListener("install", event => {
   self.skipWaiting();
 });
 
+// Activate
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -28,6 +31,7 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
+// Fetch
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(response => {
