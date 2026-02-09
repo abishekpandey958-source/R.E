@@ -8,7 +8,7 @@
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#0f172a">
   <link rel="icon" href="app-icon.png">
   <link rel="apple-touch-icon" href="app-icon.png">
 
@@ -19,34 +19,80 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* ---------- GLOBAL ---------- */
     body {
+      background: linear-gradient(180deg, #e2e8f0, #f8fafc);
       -webkit-user-select: none;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
-      background: #f1f5f9;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
     }
+
     input {
-      -webkit-user-select: text;
       user-select: text;
     }
+
+    /* ---------- SPLASH ---------- */
     #splash {
       position: fixed;
       inset: 0;
-      background: #121212;
+      background: radial-gradient(circle, #0f172a, #020617);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
+
     #splash img {
       width: 120px;
       height: 120px;
       margin-bottom: 15px;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,.6));
     }
+
     #splash h1 {
-      color: #fff;
+      color: #e5e7eb;
       font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    /* ---------- PREMIUM CARDS ---------- */
+    .card-3d {
+      background: linear-gradient(145deg, #ffffff, #e5e7eb);
+      box-shadow:
+        6px 6px 16px rgba(0,0,0,0.18),
+        inset 1px 1px 2px rgba(255,255,255,0.9);
+    }
+
+    .input-3d {
+      background: #f8fafc;
+      box-shadow:
+        inset 3px 3px 6px rgba(0,0,0,0.15),
+        inset -3px -3px 6px rgba(255,255,255,0.9);
+      font-size: 1.05rem;
+    }
+
+    /* ---------- BUTTON ---------- */
+    .btn-premium {
+      background: linear-gradient(145deg, #1e3a8a, #2563eb);
+      box-shadow:
+        0 10px 25px rgba(37,99,235,.45),
+        inset 1px 1px 2px rgba(255,255,255,.3);
+      letter-spacing: .5px;
+    }
+
+    .btn-premium:active {
+      transform: scale(.98);
+      box-shadow: inset 4px 4px 10px rgba(0,0,0,.4);
+    }
+
+    /* ---------- RESULT ---------- */
+    .result-card {
+      background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+      box-shadow:
+        8px 8px 18px rgba(0,0,0,0.25),
+        inset 1px 1px 2px rgba(255,255,255,0.85);
     }
   </style>
 </head>
@@ -61,7 +107,9 @@
 
 <!-- Header -->
 <div class="text-center mt-6">
-  <h1 class="text-xl font-bold">ATD DIMENSION CALCULATOR</h1>
+  <h1 class="text-2xl font-extrabold text-slate-900 tracking-wide">
+    ATD DIMENSION CALCULATOR
+  </h1>
   <p class="text-sm text-slate-600">
     Developed by <b>Abhishek Pandey</b>
   </p>
@@ -70,55 +118,56 @@
 <!-- Main -->
 <main class="p-4 max-w-md mx-auto space-y-4">
 
-  <div class="bg-white rounded-full shadow text-center py-3 font-semibold">
+  <div class="card-3d rounded-full text-center py-3 font-bold text-slate-800">
     3-Pulley Modified ATD
   </div>
 
   <div>
-    <label class="text-sm font-medium">Half Tension Length (m)</label>
-    <input id="length" type="number" placeholder="e.g. 750"
-      class="w-full p-3 rounded-xl border mt-1">
+    <label class="text-sm font-semibold text-slate-700">
+      Half Tension Length (m)
+    </label>
+    <input id="length" type="number"
+      class="input-3d w-full p-4 rounded-xl mt-1">
   </div>
 
   <div>
-    <label class="text-sm font-medium">Temperature (°C)</label>
-    <input id="temperature" type="number" placeholder="e.g. 35"
-      class="w-full p-3 rounded-xl border mt-1">
+    <label class="text-sm font-semibold text-slate-700">
+      Temperature (°C)
+    </label>
+    <input id="temperature" type="number"
+      class="input-3d w-full p-4 rounded-xl mt-1">
   </div>
 
   <button onclick="calculate()"
-    class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold">
+    class="btn-premium w-full text-white py-4 rounded-xl font-bold text-lg">
     Calculate Dimensions
   </button>
 
   <!-- Results -->
-  <div id="results" class="hidden bg-white rounded-xl p-4 shadow space-y-1">
+  <div id="results" class="hidden result-card rounded-xl p-4 space-y-2">
 
-    <p class="text-sm text-slate-600">
+    <p class="text-sm text-slate-700">
       <b>ΔT (Temp Difference):</b>
       <span id="deltaT">0</span> °C
     </p>
 
-    <p class="text-lg">
-      <b>X:</b>
-      <span id="resX_mm">0.00</span> mm
-      <span class="text-sm text-slate-500">
+    <p class="text-lg font-semibold text-slate-900">
+      X: <span id="resX_mm">0.00</span> mm
+      <span class="text-sm text-slate-600">
         ( <span id="resX_m">0.000</span> m )
       </span>
     </p>
 
-    <p class="text-lg">
-      <b>Y:</b>
-      <span id="resY_mm">0.00</span> mm
-      <span class="text-sm text-slate-500">
+    <p class="text-lg font-semibold text-slate-900">
+      Y: <span id="resY_mm">0.00</span> mm
+      <span class="text-sm text-slate-600">
         ( <span id="resY_m">0.000</span> m )
       </span>
     </p>
 
-    <!-- Reference Temperature Highlight -->
-    <p class="text-xs border-t pt-2 mt-2 text-blue-700 font-semibold">
+    <p class="text-xs border-t pt-2 mt-2 text-blue-800 font-bold">
       Reference Temperature =
-      <span class="bg-blue-100 px-2 py-0.5 rounded font-bold">35°C</span>
+      <span class="bg-blue-100 px-2 py-0.5 rounded">35°C</span>
       (Indian Railway TRD Standard)
     </p>
 
@@ -133,60 +182,56 @@
     Formula: X / Y = 1300 / 2300 + (L × 1.7×10⁻⁵ × ΔT)
   </p>
 
-  <p class="font-bold">
+  <p class="font-bold text-slate-700">
     EASTERN RAILWAY – TRD / BASIRHAT
   </p>
 
-  <!-- Copyright Highlight -->
-  <p class="text-[11px] mt-2 font-semibold text-amber-600">
+  <p class="text-[11px] font-semibold text-amber-600">
     © 2026 Abhishek Pandey. All Rights Reserved.
   </p>
 
 </footer>
 
 <script>
-  // Hide splash
   window.onload = () => {
     setTimeout(() => {
       document.getElementById("splash").style.display = "none";
     }, 2000);
   };
 
-  // Engineering rounding
   function round(val, digits) {
     return Math.round((val + Number.EPSILON) * 10 ** digits) / 10 ** digits;
   }
 
-  // IR-TRD Calculation
   function calculate() {
-    const L = parseFloat(document.getElementById("length").value);
-    const T = parseFloat(document.getElementById("temperature").value);
+    const L = parseFloat(length.value);
+    const T = parseFloat(temperature.value);
 
     if (isNaN(L) || isNaN(T)) {
       alert("Please enter valid numbers");
       return;
     }
 
-    const T0 = 35;        // Reference temperature
+    const T0 = 35;
     const alpha = 1.7e-5;
 
     const deltaT = T - T0;
-    const deltaL = L * alpha * deltaT * 1000; // mm
+    const deltaL = L * alpha * deltaT * 1000;
 
     const X = 1300 + deltaL;
     const Y = 2300 + 3 * deltaL;
 
-    document.getElementById("deltaT").textContent = deltaT;
-    document.getElementById("resX_mm").textContent = round(X, 2);
-    document.getElementById("resY_mm").textContent = round(Y, 2);
-    document.getElementById("resX_m").textContent = round(X / 1000, 3);
-    document.getElementById("resY_m").textContent = round(Y / 1000, 3);
+    deltaTSpan = document.getElementById("deltaT");
+    deltaTSpan.textContent = deltaT;
 
-    document.getElementById("results").classList.remove("hidden");
-    document.getElementById("results").scrollIntoView({ behavior: "smooth" });
+    resX_mm.textContent = round(X, 2);
+    resY_mm.textContent = round(Y, 2);
+    resX_m.textContent = round(X / 1000, 3);
+    resY_m.textContent = round(Y / 1000, 3);
+
+    results.classList.remove("hidden");
+    results.scrollIntoView({ behavior: "smooth" });
   }
-
-  lucide.createIcons();
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("service-worker.js");
