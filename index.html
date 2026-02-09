@@ -1,173 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATD Dimension Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<style>
-body{
-  margin:0;
-  font-family:"Segoe UI",system-ui,sans-serif;
-  background:linear-gradient(180deg,#0f172a,#e5e7eb);
-}
+  <title>ATD Dimension Calculator</title>
 
-/* COMPACT MATTE HEADER */
-.title-box{
-  margin:14px 14px 6px;
-  padding:16px 14px;
-  background:linear-gradient(145deg,#1e293b,#0f172a);
-  border-radius:18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.05),
-              0 12px 24px rgba(0,0,0,.35);
-  text-align:center;
-}
-.title-box h1{
-  margin:0;
-  font-size:23px;
-  color:#f8fafc;
-  letter-spacing:1px;
-}
-.title-box p{
-  margin-top:4px;
-  font-size:13px;
-  color:#cbd5f5;
-}
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="icon" href="app-icon.png">
+  <link rel="apple-touch-icon" href="app-icon.png">
 
-/* MAIN CARD */
-.container{
-  max-width:420px;
-  margin:0 auto;
-  padding:12px;
-}
-.card{
-  background:linear-gradient(180deg,#f8fafc,#eef2f7);
-  border-radius:20px;
-  padding:16px;
-  box-shadow:0 16px 34px rgba(0,0,0,.15);
-}
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-/* CHIP */
-.chip{
-  background:#fff;
-  border-radius:24px;
-  padding:10px;
-  text-align:center;
-  font-weight:700;
-  margin-bottom:14px;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,.08);
-}
-
-/* INPUTS */
-label{
-  font-weight:600;
-  margin:8px 0 4px;
-  display:block;
-}
-input{
-  width:100%;
-  padding:12px;
-  font-size:17px;
-  border-radius:12px;
-  border:none;
-  background:#fff;
-  box-shadow: inset 0 3px 8px rgba(0,0,0,.12);
-  outline:none;
-}
-
-/* BUTTON */
-button{
-  width:100%;
-  margin-top:14px;
-  padding:14px;
-  font-size:18px;
-  font-weight:800;
-  color:#fff;
-  border:none;
-  border-radius:16px;
-  background:linear-gradient(135deg,#1e40af,#2563eb);
-  box-shadow:0 12px 24px rgba(30,64,175,.5);
-}
-
-/* RESULT (COMPACT) */
-.result{
-  margin-top:14px;
-  padding:14px;
-  border-radius:16px;
-  background:linear-gradient(180deg,#eef2ff,#f8fafc);
-  box-shadow: inset 0 2px 10px rgba(0,0,0,.12);
-  font-size:16px;
-}
-
-/* FOOTER */
-.footer{
-  text-align:center;
-  font-size:12px;
-  margin:16px 8px;
-  color:#374151;
-}
-.footer .copy{
-  color:#f59e0b;
-  font-weight:700;
-}
-</style>
+  <style>
+    body {
+      background: linear-gradient(180deg, #0f172a, #e5e7eb);
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    input {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="title-box">
-  <h1>ATD DIMENSION CALCULATOR</h1>
-  <p>Developed by <b>Abhishek Pandey</b></p>
+<!-- Premium Matte Header -->
+<div class="mx-4 mt-6 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl p-6 text-center">
+  <h1 class="text-2xl font-bold text-white tracking-wide">
+    ATD DIMENSION CALCULATOR
+  </h1>
+  <p class="text-sm text-slate-300 mt-1">
+    Developed by <b>Abhishek Pandey</b>
+  </p>
 </div>
 
-<div class="container">
-  <div class="card">
+<!-- Main Card -->
+<main class="max-w-md mx-auto p-4">
 
-    <div class="chip">3-Pulley Modified ATD</div>
+  <div class="bg-white/90 backdrop-blur rounded-3xl shadow-2xl p-6 space-y-4">
 
-    <label>Half Tension Length (m)</label>
-    <input id="length" type="number" placeholder="750">
+    <div class="bg-white rounded-full py-3 text-center font-semibold shadow-inner">
+      3-Pulley Modified ATD
+    </div>
 
-    <label>Temperature (°C)</label>
-    <input id="temp" type="number" placeholder="35">
+    <div>
+      <label class="font-semibold text-slate-700">
+        Half Tension Length (m)
+      </label>
+      <input id="length" type="number" value="750"
+        class="w-full mt-1 p-4 rounded-xl bg-white shadow-inner focus:outline-none text-lg">
+    </div>
 
-    <button onclick="calculate()">Calculate Dimensions</button>
+    <div>
+      <label class="font-semibold text-slate-700">
+        Temperature (°C)
+      </label>
+      <input id="temperature" type="number" value="35"
+        class="w-full mt-1 p-4 rounded-xl bg-white shadow-inner focus:outline-none text-lg">
+    </div>
 
-    <div class="result" id="output">
-      Enter values and press Calculate
+    <button onclick="calculate()"
+      class="w-full py-4 rounded-2xl text-white font-bold text-lg
+             bg-gradient-to-r from-blue-700 to-blue-500
+             shadow-xl active:scale-95 transition">
+      Calculate Dimensions
+    </button>
+
+    <!-- Results -->
+    <div id="results" class="hidden bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-5 shadow-inner space-y-2">
+
+      <p class="font-semibold">
+        ΔT: <span id="deltaT">0</span> °C
+      </p>
+
+      <p class="text-lg font-bold">
+        X: <span id="resX_mm">0</span> mm
+        <span class="text-sm text-slate-500">
+          ( <span id="resX_m">0</span> m )
+        </span>
+      </p>
+
+      <p class="text-lg font-bold">
+        Y: <span id="resY_mm">0</span> mm
+        <span class="text-sm text-slate-500">
+          ( <span id="resY_m">0</span> m )
+        </span>
+      </p>
+
+      <p class="text-sm pt-2 border-t text-blue-700 font-semibold">
+        Reference Temperature =
+        <span class="bg-blue-100 px-2 py-0.5 rounded">35°C</span>
+        (Indian Railway TRD Standard)
+      </p>
+
     </div>
 
   </div>
-</div>
 
-<div class="footer">
-  Formula: X / Y = 1300 / 2300 + (L × 1.7×10<sup>-5</sup> × ΔT)<br>
-  <b>EASTERN RAILWAY – TRD / BASIRHAT</b><br>
-  <span class="copy">© 2026 Abhishek Pandey. All Rights Reserved.</span>
-</div>
+</main>
+
+<!-- Footer -->
+<footer class="text-center text-xs text-slate-700 mt-6 pb-6 space-y-1">
+  <p>
+    Formula: X / Y = 1300 / 2300 + (L × 1.7×10⁻⁵ × ΔT)
+  </p>
+  <p class="font-bold">
+    EASTERN RAILWAY – TRD / BASIRHAT
+  </p>
+  <p class="text-amber-600 font-semibold">
+    © 2026 Abhishek Pandey. All Rights Reserved.
+  </p>
+</footer>
 
 <script>
-function calculate(){
-  const L = Number(document.getElementById("length").value);
-  const T = Number(document.getElementById("temp").value);
-  if(!L || !T){
-    document.getElementById("output").innerHTML="⚠️ Enter valid values";
+function round(val, d) {
+  return Math.round((val + Number.EPSILON) * 10 ** d) / 10 ** d;
+}
+
+function calculate() {
+  const L = parseFloat(document.getElementById("length").value);
+  const T = parseFloat(document.getElementById("temperature").value);
+
+  if (isNaN(L) || isNaN(T)) {
+    alert("Please enter valid values");
     return;
   }
 
-  const refTemp=35, alpha=1.7e-5;
-  const deltaT=T-refTemp;
-  const expansion=L*alpha*deltaT;
+  const T0 = 35;
+  const alpha = 1.7e-5;
 
-  const X=1300+(1300*expansion);
-  const Y=2300+(2300*expansion);
+  const deltaT = T - T0;
+  const deltaL = L * alpha * deltaT * 1000;
 
-  document.getElementById("output").innerHTML=`
-    <b>ΔT:</b> ${deltaT.toFixed(1)} °C<br><br>
-    <b>X:</b> ${X.toFixed(2)} mm (${(X/1000).toFixed(3)} m)<br>
-    <b>Y:</b> ${Y.toFixed(2)} mm (${(Y/1000).toFixed(3)} m)<br><br>
-    Reference Temperature = <b>35°C</b>
-  `;
+  const X = 1300 + deltaL;
+  const Y = 2300 + 3 * deltaL;
+
+  document.getElementById("deltaT").textContent = deltaT.toFixed(1);
+  document.getElementById("resX_mm").textContent = round(X, 2);
+  document.getElementById("resY_mm").textContent = round(Y, 2);
+  document.getElementById("resX_m").textContent = round(X / 1000, 3);
+  document.getElementById("resY_m").textContent = round(Y / 1000, 3);
+
+  document.getElementById("results").classList.remove("hidden");
+  document.getElementById("results").scrollIntoView({ behavior: "smooth" });
 }
 </script>
 
